@@ -5,16 +5,20 @@ from sklearn.metrics import mean_absolute_error, mean_squared_error
 
 # Step 1: Data Collection
 # Assuming you have a DataFrame 'df' with columns for mid-term marks and 'semester_percentage'
-df = pd.read_csv('./student_data.csv')
+df = pd.read_csv('student_data.csv')
 
 # Step 2: Data Preprocessing
 # Selecting all mid-term marks as features
-features = df[
+feature_columns = [
     'mid_term_1_marks_sub1', 'mid_term_1_marks_sub2', 'mid_term_1_marks_sub3', 'mid_term_1_marks_sub4', 'mid_term_1_marks_sub5',
     'mid_term_2_marks_sub1', 'mid_term_2_marks_sub2', 'mid_term_2_marks_sub3', 'mid_term_2_marks_sub4', 'mid_term_2_marks_sub5'
 ]
-X = df[features]  # Features
+X = df[feature_columns]  # Features
 y = df['semester_percentage']  # Target variable
+
+print(y.shape, X.shape)  
+print(X.info())
+print(X.columns)
 
 # Split the data into training and testing sets
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
